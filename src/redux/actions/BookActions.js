@@ -1,6 +1,8 @@
+import * as types from "./actionTypes";
+
 export function createBook(book) {
   return {
-    type: "CREATE_BOOK",
+    type: types.CREATE_BOOK,
     book: book,
   };
 }
