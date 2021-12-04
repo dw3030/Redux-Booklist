@@ -61,7 +61,7 @@ function ManageBookPage({
 }
 
 ManageBookPage.propTypes = {
-  book: PropTypes.array.isRequired,
+  book: PropTypes.object.isRequired,
   authors: PropTypes.array.isRequired,
   books: PropTypes.array.isRequired,
   loadBooks: PropTypes.func.isRequired,
@@ -70,8 +70,8 @@ ManageBookPage.propTypes = {
   history: PropTypes.object.isRequired,
 };
 
-export function getBookBySlug(courses, slug) {
-  return courses.find((course) => course.slug === slug) || null;
+export function getBookBySlug(books, slug) {
+  return books.find((book) => book.slug === slug) || null;
 }
 
 function mapStateToProps(state, ownProps) {

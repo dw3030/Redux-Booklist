@@ -29,7 +29,7 @@ class BooksPage extends React.Component {
   render() {
     return (
       <>
-        {this.state.redirectToAddBookPage && <Redirect to="/course" />}
+        {this.state.redirectToAddBookPage && <Redirect to="/book" />}
         <h2>Books</h2>
         <button
           style={{ marginBottom: 20 }}
