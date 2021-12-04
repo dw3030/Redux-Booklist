@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as BookActions from "../../redux/actions/BookActions";
+import PropTypes from "prop-types";
 
 class BooksPage extends React.Component {
   state = {
@@ -14,7 +17,7 @@ class BooksPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    alert(this.state.book.title);
+    this.props.dispatch(BookActions.createBook(this.state.book));
   };
 
   render() {
@@ -28,9 +31,23 @@ class BooksPage extends React.Component {
           value={this.state.book.title}
         />
         <input type="submit" value="Save" />
+        {this.props.books.map((book) => (
+          <div key={book.title}>{book.title}</div>
+        ))}
       </form>
     );
   }
 }
 
-export default BooksPage;
+BooksPage.propTypes = {
+  books: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    books: state.books,
+  };
+}
+
+export default connect(mapStateToProps)(BooksPage);
