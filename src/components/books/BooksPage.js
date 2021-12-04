@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as BookActions from "../../redux/actions/BookActions";
+import * as bookActions from "../../redux/actions/bookActions";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 
 class BooksPage extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class BooksPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch(BookActions.createBook(this.state.book));
+    this.props.actions.createBook(this.state.book);
   };
 
   render() {
@@ -41,7 +42,7 @@ class BooksPage extends React.Component {
 
 BooksPage.propTypes = {
   books: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -50,4 +51,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(BooksPage);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(bookActions, dispatch),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BooksPage);
