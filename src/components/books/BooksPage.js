@@ -5,22 +5,40 @@ import * as authorActions from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import BookList from "./BookList";
+import { Redirect } from "react-router-dom";
 
 class BooksPage extends React.Component {
+  state = {
+    redirectToAddBookPage: false,
+  };
+
   componentDidMount() {
-    this.props.actions.loadBooks().catch((error) => {
-      alert("Loading booklist failed" + error);
-    });
+    const { books, authors, actions } = this.props;
 
-    this.props.actions.loadAuthors().catch((error) => {
-      alert("Loading authors failed" + error);
-    });
+    if (books.length === 0) {
+      actions.loadBooks().catch((error) => {
+        alert("Loading booklist failed" + error);
+      });
+    }
+    if (authors.length === 0) {
+      actions.loadAuthors().catch((error) => {
+        alert("Loading authors failed" + error);
+      });
+    }
   }
-
   render() {
     return (
       <>
+        {this.state.redirectToAddBookPage && <Redirect to="/course" />}
         <h2>Books</h2>
+        <button
+          style={{ marginBottom: 20 }}
+          className="btn btn-primary add-book"
+          onClick={() => this.setState({ redirectToAddBookPage: true })}
+        >
+          Add Book
+        </button>
+
         <BookList books={this.props.books} />
       </>
     );
@@ -28,6 +46,7 @@ class BooksPage extends React.Component {
 }
 
 BooksPage.propTypes = {
+  authors: PropTypes.array.isRequired,
   books: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
 };

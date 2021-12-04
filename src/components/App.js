@@ -5,6 +5,7 @@ import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import BooksPage from "./books/BooksPage";
+import ManageBookPage from "./books/ManageBookPage";
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
         <Route path="/books" component={BooksPage} />
+        <Route path="/book/:slug" component={ManageBookPage} />
+        <Route path="/book" component={ManageBookPage} />
         <Route component={PageNotFound} />
       </Switch>
     </div>
