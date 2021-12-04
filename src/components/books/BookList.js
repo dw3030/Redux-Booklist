@@ -27,7 +27,7 @@ const BookList = ({ books }) => (
             <td>
               <Link to={"/book/" + book.slug}>{book.title}</Link>
             </td>
-            <td>{book.authorId}</td>
+            <td>{book.authorName}</td>
             <td>{book.category}</td>
           </tr>
         );
