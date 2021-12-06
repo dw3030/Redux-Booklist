@@ -5,6 +5,7 @@ import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import BookForm from "./BookForm";
 import { newBook } from "../../../tools/mockData";
+import BookList from "./BookList";
 
 function ManageBookPage({
   books,
@@ -34,16 +35,16 @@ function ManageBookPage({
     }
   }, [props.book]);
 
-  function handleChange(event) {
-    const { name, value } = event.target;
+  function handleChange(e) {
+    const { name, value } = e.target;
     setBook((prevBook) => ({
       ...prevBook,
       [name]: name === "authorId" ? parseInt(value, 10) : value,
     }));
   }
 
-  function handleSave(event) {
-    event.preventDefault();
+  function handleSave(e) {
+    e.preventDefault();
     saveBook(book).then(() => {
       history.push("/books");
     });
@@ -79,7 +80,7 @@ function mapStateToProps(state, ownProps) {
   const book =
     slug && state.books.length > 0 ? getBookBySlug(state.books, slug) : newBook;
   return {
-    book,
+    book: book,
     books: state.books,
     authors: state.authors,
   };
