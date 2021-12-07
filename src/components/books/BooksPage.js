@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import BookList from "./BookList";
 import { Redirect } from "react-router-dom";
+import Spinner from "../common/Spinner";
 
 class BooksPage extends React.Component {
   state = {
@@ -31,15 +32,21 @@ class BooksPage extends React.Component {
       <>
         {this.state.redirectToAddBookPage && <Redirect to="/book" />}
         <h2>Books</h2>
-        <button
-          style={{ marginBottom: 20 }}
-          className="btn btn-primary add-book"
-          onClick={() => this.setState({ redirectToAddBookPage: true })}
-        >
-          Add Book
-        </button>
+        {this.props.loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <button
+              style={{ marginBottom: 20 }}
+              className="btn btn-primary add-book"
+              onClick={() => this.setState({ redirectToAddBookPage: true })}
+            >
+              Add Book
+            </button>
 
-        <BookList books={this.props.books} />
+            <BookList books={this.props.books} />
+          </>
+        )}
       </>
     );
   }
@@ -49,6 +56,7 @@ BooksPage.propTypes = {
   authors: PropTypes.array.isRequired,
   books: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -64,6 +72,7 @@ function mapStateToProps(state) {
             };
           }),
     authors: state.authors,
+    loading: state.apiCallsInProgress > 0,
   };
 }
 

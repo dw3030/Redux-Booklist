@@ -5,7 +5,8 @@ import { loadAuthors } from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import BookForm from "./BookForm";
 import { newBook } from "../../../tools/mockData";
-import BookList from "./BookList";
+import Spinner from "../common/Spinner";
+import { toast } from "react-toastify";
 
 function ManageBookPage({
   books,
@@ -18,6 +19,7 @@ function ManageBookPage({
 }) {
   const [book, setBook] = useState({ ...props.book });
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (books.length === 0) {
@@ -45,18 +47,23 @@ function ManageBookPage({
 
   function handleSave(e) {
     e.preventDefault();
+    setSaving(true);
     saveBook(book).then(() => {
+      toast.success("Book saved!");
       history.push("/books");
     });
   }
 
-  return (
+  return authors.length === 0 || books.length === 0 ? (
+    <Spinner />
+  ) : (
     <BookForm
       book={book}
       errors={errors}
       authors={authors}
       onChange={handleChange}
       onSave={handleSave}
+      saving={saving}
     />
   );
 }
