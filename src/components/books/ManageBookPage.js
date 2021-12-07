@@ -45,13 +45,35 @@ function ManageBookPage({
     }));
   }
 
+  function formIsValid() {
+    const { title, authorId, category } = book;
+    const errors = {};
+
+    if (!title) errors.title = "Title is required.";
+    if (!authorId) errors.author = "Author is required.";
+    if (!category) errors.category = "Category is required.";
+
+    setErrors(errors);
+    //form valid if the errors obj still has no properties
+    return Object.keys(errors).length === 0;
+  }
+
   function handleSave(e) {
     e.preventDefault();
+    if (!formIsValid()) {
+      return;
+    }
+
     setSaving(true);
-    saveBook(book).then(() => {
-      toast.success("Book saved!");
-      history.push("/books");
-    });
+    saveBook(book)
+      .then(() => {
+        toast.success("Book saved!");
+        history.push("/books");
+      })
+      .catch((error) => {
+        setSaving(false);
+        setErrors({ onSave: error.message });
+      });
   }
 
   return authors.length === 0 || books.length === 0 ? (
