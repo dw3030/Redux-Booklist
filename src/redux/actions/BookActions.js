@@ -53,6 +53,8 @@ export function saveBook(book) {
 
 export function deleteBook(book) {
   return function (dispatch) {
+    //doing optimistic delete, so not dispatching begin/end api call
+    // actior , or apicallerror action since not showing loading status for this
     dispatch(deleteBookOptimistic(book));
     return bookApi.deleteBook(book.id);
   };

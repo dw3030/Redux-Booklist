@@ -29,11 +29,13 @@ class BooksPage extends React.Component {
     }
   }
 
-  handleDeleteBook = (book) => {
+  handleDeleteBook = async (book) => {
     toast.success("Book deleted");
-    this.props.actions.deleteBook(book).catch((error) => {
+    try {
+      await this.props.actions.deleteBook(book);
+    } catch (error) {
       toast.error("Delete failed." + error.message, { autoClose: false });
-    });
+    }
   };
 
   render() {
