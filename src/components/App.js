@@ -5,7 +5,7 @@ import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import BooksPage from "./books/BooksPage";
-import ManageBookPage from "./books/ManageBookPage";
+import ManageBookPage from "./books/ManageBookPage"; // eslint-disable-line import/no-named-as-default
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
