@@ -1,21 +1,41 @@
-# Starter Kit for [Building Applications in React and Redux](http://www.pluralsight.com/author/cory-house) on Pluralsight
+# React-Redux Booklist App
 
-## Get Started
+## Intro 
 
-1. **Install [Node 8](https://nodejs.org)** or newer. Need to run multiple versions of Node? Use [nvm](https://github.com/creationix/nvm) or [nvm-windows](https://github.com/coreybutler/nvm-windows)(https://github.com/coryhouse/pluralsight-redux-starter/archive/master.zip)
-2. **Navigate to this project's root directory on the command line.**
-3. **Install Node Packages.** - `npm install`
-4. **Install [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) and [Redux Dev Tools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en)** in Chrome.
-5. Having issues? See below.
+This is an app that utilized a Pluralsight tutorial by Cory House: a "course-listing application" for React-Redux as a go-by, but was customized during development to be a web application for organizing books and authors.
 
-## Having Issues? Try these things first:
+## Summary of Features & Functionality
 
-1. Run `npm install` - If you forget to do this, you'll get an error when you try to start the app later.
-2. Don't run the project from a symbolic link. It will cause issues with file watches.
-3. Delete any .eslintrc in your user directory and disable any ESLint plugin / custom rules within your editor since these will conflict with the ESLint rules defined in the course.
-4. On Windows? Open your console as an administrator. This will assure the console has the necessary rights to perform installs.
-5. Ensure you do not have NODE_ENV=production in your env variables as it will not install the devDependencies. To check run this on the command line: `set NODE_ENV`. If it comes back as production, you need to clear this env variable.
-6. Nothing above work? Delete your node_modules folder and re-run npm install.
+This application intitally has 3 views, Home, Books, and About, and will display a 404 message when the incorrect URL is entered.
+Users can fetch a list of books from a mock API object, edit the Title and Category of the book, and select from a list of authors.  
+Users can add a book to the list, or delete a book from the list.
+Users can edit the Title and Category of any book on the list.
+
+## Future Improvements
+
+- Lots of styling for the UI still to come
+- Including logic to add/edit Authors (instead of a fixed dropdown list)
+- Users able to filter by table headings in the book list
+- Hiding the table UI when the list is empty
+- More messages for additional error handling or user communication (ie. confirmation messages or warnings if leaving a form unsubmitted)
+- More strict constraints on data entered
+- Added relevant info displayed, such as a count of books in the list
+- Adding pagination for longer lists
+- Sort list functionality
+- Ability to revert saved changes
+- Additional features as they arise
+
+
+## Testing 
+
+Testing integrated with Jest, Enzyme, and React Testing Library to experiment with different unit testing approaches.
+
+## Bundling
+
+Using Webpack for bundling.
+
+-----------------------------------------------------------------------------------
+## Dependencies from create-react-app scaffolding
 
 ### Production Dependencies
 
